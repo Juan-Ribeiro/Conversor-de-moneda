@@ -11,9 +11,9 @@ public class Menu {
 
         switch (respuesta) {
             case 0:
-                System.out.println("Conversor de moneda");
+                System.out.println("Eligió: Conversor de moneda.");
                 conversor = new ConversorDeMoneda();
-                conversor.iniciar();
+                conversor.iniciarConversor();
                 break;
             case 1:
                 System.out.println("Conversor de temperatura");
