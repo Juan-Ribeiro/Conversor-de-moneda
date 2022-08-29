@@ -1,11 +1,8 @@
 import javax.swing.*;
 
-public class ConversorDeMoneda {
+public class ConversorDeMoneda extends Conversor{
 
-    private static final Object[] opciones = new String[]{"De Pesos a Dólar Americano", "De Pesos a Euro",
-            "De Pesos a Libra Esterlina", "De Pesos a Yen Japonés", "De Pesos a Won Coreano",
-            "De Dólar Americano a Pesos", "De Euro a Pesos", "De Libra Esterlina a Pesos",
-            "De Yen Japonés a Pesos", "De Won Coreano a Pesos", "De Euros a Pesos"};
+    private static Object[] OPCIONES;
 
     // Cotización de monedas Peso Argentino. Fecha: 28/8/2022
     private static final double VALOR_DOLAR_AMERICANO = 138.12;
@@ -14,10 +11,17 @@ public class ConversorDeMoneda {
     private static final double VALOR_YEN_JAPONES = 1;
     private static final double VALOR_WON_COREANO = 9.72;
 
+    public ConversorDeMoneda() {
+        OPCIONES = new String[]{"De Pesos a Dólar Americano", "De Pesos a Euro",
+                "De Pesos a Libra Esterlina", "De Pesos a Yen Japonés", "De Pesos a Won Coreano",
+                "De Dólar Americano a Pesos", "De Euro a Pesos", "De Libra Esterlina a Pesos",
+                "De Yen Japonés a Pesos", "De Won Coreano a Pesos", "De Euros a Pesos"};
+    }
+
     public void iniciarConversor() {
         try {
             double valor = solicitarValor();
-            String opcion = solicitarOpcionDeConversion().toString();
+            String opcion = solicitarOpcionDeConversion();
             String resultado = realizarConversion(valor, opcion);
             JOptionPane.showMessageDialog(null, resultado);
         } catch (CancelarException e) {
@@ -25,7 +29,38 @@ public class ConversorDeMoneda {
         }
     }
 
-    private String realizarConversion(double valor, String opcion) {
+    protected double solicitarValor() throws CancelarException {
+        double valor = 0;
+        boolean valido = false;
+
+        while (!valido) {
+            try {
+                valor = Double.parseDouble(JOptionPane.showInputDialog(null,
+                        "Ingrese el valor de moneda a convertir.", "Valor", JOptionPane.QUESTION_MESSAGE));
+                if (valor > 0) {
+                    valido = true;
+                } else {
+                    throw new ValorNumericoInvalidoException("El valor numérico debe ser mayor a 0.");
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Valor inválido. Intente nuevamente.");
+            } catch (NullPointerException e) {
+                throw new CancelarException();
+            }
+        }
+        return valor;
+    }
+
+    protected String solicitarOpcionDeConversion() throws CancelarException {
+        String opcion = JOptionPane.showInputDialog(null, "Seleccione una opción de conversión",
+                "MONEDAS", JOptionPane.QUESTION_MESSAGE, null, OPCIONES, OPCIONES[0]).toString();
+        if (opcion == null) {
+            throw new CancelarException();
+        }
+        return opcion;
+    }
+
+    protected String realizarConversion(double valor, String opcion) {
         String conversion = "";
         double resultado;
 
@@ -73,36 +108,5 @@ public class ConversorDeMoneda {
         }
 
         return conversion;
-    }
-
-    private double solicitarValor() throws CancelarException {
-        double valor = 0;
-        boolean valido = false;
-
-        while (!valido) {
-            try {
-                valor = Double.parseDouble(JOptionPane.showInputDialog(null,
-                        "Ingrese el valor de moneda a convertir.", "Valor", JOptionPane.QUESTION_MESSAGE));
-                if (valor > 0) {
-                    valido = true;
-                } else {
-                    throw new ValorNumericoNegativoException();
-                }
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Valor inválido. Intente nuevamente.");
-            } catch (NullPointerException e) {
-                throw new CancelarException();
-            }
-        }
-        return valor;
-    }
-
-    private Object solicitarOpcionDeConversion() throws CancelarException {
-        Object opcion = JOptionPane.showInputDialog(null, "Seleccione una opción de conversión",
-                "MONEDAS", JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
-        if (opcion == null) {
-            throw new CancelarException();
-        }
-        return opcion;
     }
 }

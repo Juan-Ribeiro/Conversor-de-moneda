@@ -1,5 +1,3 @@
-import jdk.nashorn.internal.scripts.JO;
-
 import javax.swing.*;
 
 public class Menu {
@@ -10,7 +8,7 @@ public class Menu {
             int respuesta = JOptionPane.showOptionDialog(null,
                     "Bienvenid@. Seleccione un conversor.", "Conversor de unidades",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
-            ConversorDeMoneda conversor;
+            Conversor conversor;
 
             switch (respuesta) {
                 case 0:
@@ -18,8 +16,8 @@ public class Menu {
                     conversor.iniciarConversor();
                     break;
                 case 1:
-                    System.out.println("Conversor de temperatura");
-                    // TODO: 28/8/2022 Implementar
+                    conversor = new ConversorDeTemperatura();
+                    conversor.iniciarConversor();
                     break;
             }
 
