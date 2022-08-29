@@ -21,7 +21,7 @@ public class ConversorDeMoneda {
             String resultado = realizarConversion(valor, opcion);
             JOptionPane.showMessageDialog(null, resultado);
         } catch (CancelarException e) {
-            JOptionPane.showMessageDialog(null, "Programa terminado.");
+            JOptionPane.showMessageDialog(null, "Operación de conversión cancelada.");
         }
     }
 
@@ -32,43 +32,43 @@ public class ConversorDeMoneda {
         switch (opcion) {
             case "De Pesos a Dólar Americano":
                 resultado = valor / VALOR_DOLAR_AMERICANO;
-                conversion = "Usted tiene " + resultado + "USD.";
+                conversion = "Usted tiene " + resultado + " USD.";
                 break;
             case "De Pesos a Euro":
                 resultado = valor / VALOR_EURO;
-                conversion = "Usted tiene " + resultado + "Euros.";
+                conversion = "Usted tiene " + resultado + " Euros.";
                 break;
             case "De Pesos a Libra Esterlina":
                 resultado = valor / VALOR_LIBRA_ESTERLINA;
-                conversion = "Usted tiene " + resultado + "Libras Esterlinas.";
+                conversion = "Usted tiene " + resultado + " Libras Esterlinas.";
                 break;
             case "De Pesos a Yen Japonés":
                 resultado = valor / VALOR_YEN_JAPONES;
-                conversion = "Usted tiene " + resultado + "Yenes Japoneses.";
+                conversion = "Usted tiene " + resultado + " Yenes Japoneses.";
                 break;
             case "De Pesos a Won Coreano":
                 resultado = valor / VALOR_WON_COREANO;
-                conversion = "Usted tiene " + resultado + "Wones Coreanos.";
+                conversion = "Usted tiene " + resultado + " Wones Coreanos.";
                 break;
             case "De Dólar Americano a Pesos":
                 resultado = valor * VALOR_DOLAR_AMERICANO;
-                conversion = "Usted tiene " + resultado + "Pesos.";
+                conversion = "Usted tiene " + resultado + " Pesos.";
                 break;
             case "De Euro a Pesos":
                 resultado = valor * VALOR_EURO;
-                conversion = "Usted tiene " + resultado + "Pesos.";
+                conversion = "Usted tiene " + resultado + " Pesos.";
                 break;
             case "De Libra Esterlina a Pesos":
                 resultado = valor * VALOR_LIBRA_ESTERLINA;
-                conversion = "Usted tiene " + resultado + "Pesos.";
+                conversion = "Usted tiene " + resultado + " Pesos.";
                 break;
             case "De Yen Japonés a Pesos":
                 resultado = valor * VALOR_YEN_JAPONES;
-                conversion = "Usted tiene " + resultado + "Pesos.";
+                conversion = "Usted tiene " + resultado + " Pesos.";
                 break;
             case "De Won Coreano a Pesos":
                 resultado = valor * VALOR_WON_COREANO;
-                conversion = "Usted tiene " + resultado + "Pesos.";
+                conversion = "Usted tiene " + resultado + " Pesos.";
                 break;
         }
 
